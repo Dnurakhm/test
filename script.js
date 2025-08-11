@@ -163,3 +163,21 @@
   });
 })();
 
+document.addEventListener("DOMContentLoaded", () => {
+ const counters = document.querySelectorAll('.stat-number');
+ const speed = 200; // Чем больше — тем медленнее анимация
+ counters.forEach(counter => {
+   const updateCount = () => {
+     const target = +counter.parentElement.getAttribute('data-target');
+     const count = +counter.innerText;
+     const increment = Math.ceil(target / speed);
+     if (count < target) {
+       counter.innerText = count + increment > target ? target : count + increment;
+       requestAnimationFrame(updateCount);
+     } else {
+       counter.innerText = target;
+     }
+   };
+   updateCount();
+ });
+});

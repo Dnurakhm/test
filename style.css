@@ -19,7 +19,15 @@ body{
   color:#071028;
   -webkit-font-smoothing:antialiased;
 }
-.container{max-width:var(--max-w);margin:0 auto;padding:0 16px}
+.container {
+ width: 100%;
+ max-width: 1200px;
+ display: flex;
+ flex-wrap: wrap;            /* Позволяет переносить элементы */
+ justify-content: center;
+ align-items: center;
+ gap: 2rem;
+}
 
 /* Offcanvas */
 .offcanvas{position:fixed;inset:0;padding:28px;background:rgba(3,6,12,0.9);display:none;z-index:1400}
@@ -94,7 +102,7 @@ body{
  align-items: center;
  justify-content: flex-start; /* содержимое слева */
  position: relative;
- overflow: hidden;
+ overflow: visible;
  color: #fff;
  z-index: 1;
 }
@@ -128,90 +136,69 @@ body{
 .promo-timer{background:rgba(255,255,255,0.06);padding:6px 10px;border-radius:8px;font-weight:700}
 
 /* Sections */
-.section{padding:36px 0}
+.section {
+ height: 100vh;              /* Вся высота окна */
+ box-sizing: border-box;     /* Учитываем паддинги */
+ padding: 2rem;              /* Отступы внутри секции */
+ display: flex;              /* Флекс-контейнер */
+ flex-direction: column;     /* Вертикальное расположение */
+ justify-content: center;    /* Центрируем по вертикали */
+ align-items: center;        /* Центрируем по горизонтали */
+ overflow: hidden;           /* Чтобы не было скролла внутри */
+}
 .section-alt{background:#f4f7fb}
 .section-title{text-align:center;margin:0 0 18px;font-size:18px;font-weight:700}
 
+
 /* Серый фон всей секции benefits */
 .benefits-overlap {
- background-color: #f0f0f5; /* светло-серый */
- padding-top: 150px; /* отступ сверху, чтобы «наезд» не резал */
- padding-bottom: 48px;
- position: relative;
- z-index: 0;
+ height: 100vh;            /* вся высота экрана */
+ display: flex;
+ flex-direction: column;
+ justify-content: center;  /* вертикальное центрирование */
+ align-items: center;      /* горизонтальное центрирование */
+ padding: 2rem;
+ box-sizing: border-box;
 }
-/* Сетка без изменений */
 .benefits-grid {
- display: grid;
- grid-template-columns: 1fr;
- gap: 24px;
- max-width: var(--max-width);
- margin: 0 auto;
- position: relative;
- z-index: 1;
+  width: 100%;
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ gap: 2rem;
 }
-@media (min-width: 720px) {
- .benefits-grid {
-   grid-template-columns: repeat(2, 1fr);
- }
-}
-@media (min-width: 1100px) {
- .benefits-grid {
-   grid-template-columns: repeat(4, 1fr);
- }
-}
-/* Карточки бенефитов — белые прямоугольники с тенью */
 .benefit {
  background: #fff;
  border-radius: 12px;
- box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
- padding: 30px 24px;
+ box-shadow: 0 6px 18px rgb(0 0 0 / 0.15);
+ padding: 2rem;
+ flex: 1 1 250px;          /* минимальная ширина 250px, карточки растягиваются */
+ display: flex;
+ flex-direction: column;
+ justify-content: center;  /* центрируем контент внутри карточки */
  text-align: center;
- transition: transform 0.3s ease, box-shadow 0.3s ease;
+ min-height: 100%;         /* чтобы карточка полностью заполнила высоту родителя (.benefits-grid) */
+ transition: transform 0.3s ease;
 }
-/* Наезд первого бенефита на hero — поднимаем вверх на 50% его высоты */
-.benefit.overlap {
- margin-top: -90px; /* регулируй по высоте блока */
- box-shadow: 0 28px 48px rgba(0, 0, 0, 0.15);
- z-index: 10;
- position: relative;
- 
+.benefit:hover {
+ transform: translateY(-8px);
 }
-/* Иконки и тексты оставим без изменений */
 .benefit .ico {
- font-size: 32px;
- margin-bottom: 16px;
+ font-size: 48px;
+ margin-bottom: 1rem;
 }
 .benefit h3 {
- margin: 12px 0 14px;
- font-weight: 700;
- font-size: 18px;
+ margin-bottom: 0.5rem;
+ font-weight: 600;
+ font-size: 1.25rem;
 }
 .benefit p {
- color: #555; /* темный текст */
- font-size: 14px;
- line-height: 1.5;
-}
-/* Адаптивность для 2 и 1 колонки */
-@media (max-width: 1100px) {
- .benefits-grid {
-   grid-template-columns: repeat(2, 1fr);
- }
-}
-@media (max-width: 720px) {
- .benefits-grid {
-   grid-template-columns: 1fr;
- }
- /* Для мобильных наезд отключаем */
- .benefit.overlap {
-   margin-top: 0;
-   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
- }
+ color: #555;
+ font-size: 1rem;
 }
 
 
-/* Benefits */
-.benefit:hover{transform:translateY(-6px)}
+
 
 /* Services grid & cards */
 .services-grid{display:grid;grid-template-columns:1fr;gap:12px}
@@ -279,4 +266,55 @@ body{
 /* reduced motion */
 @media (prefers-reduced-motion: reduce){
   .card, .fixed-btn, .btn-small, .service { transition: none !important; animation: none !important; }
+}
+.stats-section {
+ height: 100vh;
+ background: linear-gradient(135deg, #5e2ce0, #321c74); /* красивый фиолетовый градиент */
+ color: white;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding: 0 2rem;
+ box-sizing: border-box;
+}
+.stats-container {
+ width: 100%;
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ gap: 2rem;
+}
+.stat-item {
+ text-align: center;
+ flex: 1 1 200px;
+}
+.stat-number {
+ font-size: 7rem;
+ font-weight: 700;
+ line-height: 1;
+ user-select: none;
+ font-family: 'Inter', sans-serif;
+}
+.stat-label {
+ margin-top: 0.5rem;
+ font-size: 1.5rem;
+ font-weight: 500;
+ user-select: none;
+ font-family: 'Inter', sans-serif;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 768px) {
+ section {
+   padding: 1rem;
+ }
+ .container {
+   flex-direction: column;
+   align-items: stretch;
+ }
+ .benefits-grid,
+ .stats-container {
+   flex-direction: column;
+   gap: 1.5rem;
+ }
 }
